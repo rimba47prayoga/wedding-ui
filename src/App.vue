@@ -7,16 +7,20 @@
 <script>
 export default {
   name: "App",
+  mounted() {
+    Array.from(document.querySelectorAll("html, body, div#app")).forEach(
+      (item) => {
+        item.classList.add("h-100");
+      }
+    );
+  },
 };
 </script>
 
 <style>
-html,
-body,
 #app {
-  overflow-x: hidden;
-}
-#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: #fbf6f3;
 }
 </style>

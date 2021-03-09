@@ -36,6 +36,9 @@ export default {
 
 <style lang="less">
 .akad {
+  max-width: 850px !important;
+  margin: 0px auto;
+  padding: 20px 30px;
   .nav-title {
     font-size: 36px;
     font-family: "Ananda Black", sans-serif;

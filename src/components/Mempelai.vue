@@ -33,10 +33,17 @@ export default {
 
 <style lang="less">
 .mempelai {
+  max-width: 850px !important;
+  margin: 0px auto;
+  padding: 20px 30px;
   .parents {
     display: flex;
     justify-content: space-between;
     padding: 0px 15px 0 90px;
+
+    @media (max-width: 576px) {
+      padding: 0;
+    }
   }
   .content {
     text-align: center;

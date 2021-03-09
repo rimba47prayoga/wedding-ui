@@ -11,7 +11,11 @@
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "qrcode": "^1.4.4",
     "vue": "^2.6.11",
+    "vue-device-detector": "github:weilbith/vue-device-detector",
+    "vue-mobile-detection": "^1.0.0",
+    "vue-qrcode": "^0.3.5",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },

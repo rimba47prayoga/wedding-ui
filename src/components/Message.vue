@@ -64,6 +64,9 @@ export default {
       current_page: 1,
     };
   },
+  mounted() {
+    this.getMessage(1);
+  },
   methods: {
     getMessage(page) {
       if (typeof page === "string") {
@@ -106,6 +109,9 @@ export default {
 
 <style lang="less">
 .pesan {
+  max-width: 850px !important;
+  margin: 0px auto;
+  padding: 20px 30px;
   form {
     .form-group {
       &.nama,

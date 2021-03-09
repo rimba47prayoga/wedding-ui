@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
+import VueMobileDetection from "vue-mobile-detection";
+
 
 import router from './router';
 import { store } from './store'
@@ -15,6 +17,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
+Vue.use(VueMobileDetection)
 
 axios.defaults.baseURL = 'https://docs-api.bahtera.tech' // eslint-disable-line
 

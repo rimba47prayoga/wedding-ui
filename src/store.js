@@ -38,6 +38,15 @@ export const store = new Vuex.Store({
         kloter: null,
         is_private: false
       }
+    },
+    guest_information: {
+      qrguest: "",
+      guest_id: 0,
+      guest_name: "",
+      guest_address: "",
+      kloter: "",
+      is_attend: false,
+      is_confirmed: false
     }
   },
   mutations: {
@@ -46,6 +55,9 @@ export const store = new Vuex.Store({
     },
     SET_WEDDING_INFO(state, data) {
       state.wedding_information = data;
+    },
+    SET_GUEST_INFO(state, data) {
+      state.guest_information = data;
     }
   },
   actions: {
@@ -54,6 +66,9 @@ export const store = new Vuex.Store({
     },
     setWeddingInfo({ commit }, data) {
       commit('SET_WEDDING_INFO', data);
+    },
+    setGuestInfo({ commit }, data) {
+      commit('SET_GUEST_INFO', data);
     }
   }
 })

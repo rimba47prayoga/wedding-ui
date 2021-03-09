@@ -15,6 +15,7 @@
             :aria-describedby="ariaDescribedby"
             @change="onCheck"
             name="checkbox-confirmation"
+            :stacked="$isMobile()"
           ></b-form-checkbox-group>
         </b-form-group>
       </div>
@@ -50,6 +51,13 @@ export default {
 
 <style lang="less">
 .confirmation {
+  max-width: 850px !important;
+  margin: 0px auto;
+  padding: 20px 30px;
+
+  @media (max-width: 576px) {
+    padding: 20px 15px;
+  }
   .nav-title {
     font-size: 36px;
     font-family: "Ananda Black", sans-serif;
@@ -62,9 +70,17 @@ export default {
     }
     .choices {
       padding: 0 30px;
+      @media (max-width: 576px) {
+        display: flex;
+        justify-content: center;
+      }
       #checkbox-confirmation {
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 576px) {
+          display: block;
+        }
       }
     }
   }

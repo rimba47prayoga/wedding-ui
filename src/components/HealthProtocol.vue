@@ -37,6 +37,9 @@ export default {};
 .health-protocol {
   display: flex;
   align-items: center;
+  max-width: 1000px !important;
+  margin: 0px auto;
+  padding: 20px 30px;
 
   @media (max-width: 576px) {
     display: block;

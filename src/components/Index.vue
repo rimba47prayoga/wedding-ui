@@ -1,45 +1,93 @@
 <template>
   <div class="base-container">
-    <div class="segment">
-      <Mempelai />
-    </div>
-    <div class="segment">
-      <Akad />
-    </div>
-    <div class="segment">
-      <Resepsi />
-    </div>
-    <div class="segment">
-      <HealthProtocol />
-    </div>
-    <div class="segment">
-      <Confirmation />
-    </div>
-    <div class="segment">
-      <Message />
-    </div>
+    <template v-if="isOpen">
+      <div class="segment">
+        <Story />
+      </div>
+      <div class="segment">
+        <Mempelai />
+      </div>
+      <div class="segment">
+        <Akad />
+      </div>
+      <div class="segment">
+        <Resepsi />
+      </div>
+      <div class="segment">
+        <HealthProtocol />
+      </div>
+      <div class="segment">
+        <Galery />
+      </div>
+      <div class="segment">
+        <Confirmation />
+      </div>
+      <div class="segment">
+        <Message />
+      </div>
+      <div class="segment">
+        <Gift />
+      </div>
+      <footer>
+        <div class="atera-sosmed">
+          <img src="@/assets/logo-atera.png" />
+          <a :href="footer.url_ig">
+            <img src="@/assets/atera-ig.png" />
+          </a>
+          <a :href="footer.url_globe">
+            <img src="@/assets/atera-globe.png" />
+          </a>
+          <a :href="footer.url_fb">
+            <img src="@/assets/atera-fb.png" />
+          </a>
+        </div>
+        <div class="copyright">
+          Copyright © 2021 Atera Powered by Bahtera Indonesia. All rights
+          reserved.
+        </div>
+      </footer>
+    </template>
+    <Invitation v-else @openInvitation="openInvitation" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
+import Invitation from "@/components/Invitation.vue";
+import Story from "@/components/Story.vue";
 import Mempelai from "@/components/Mempelai.vue";
 import Akad from "@/components/Akad.vue";
 import Resepsi from "@/components/Resepsi.vue";
 import HealthProtocol from "@/components/HealthProtocol.vue";
+import Galery from "@/components/Galery.vue";
 import Confirmation from "@/components/Confirmation.vue";
 import Message from "@/components/Message.vue";
+import Gift from "@/components/Gift.vue";
 
 export default {
   name: "Index",
   components: {
+    Invitation,
+    Story,
     Mempelai,
     Akad,
     Resepsi,
     Confirmation,
     Message,
     HealthProtocol,
+    Galery,
+    Gift,
+  },
+  data() {
+    return {
+      isOpen: false,
+      footer: {
+        url_ig: "",
+        url_fb: "",
+        url_globe: "",
+      },
+    };
   },
   created() {
     const code = this.$route.params.code;
@@ -58,27 +106,56 @@ export default {
           }
           this.$store.dispatch("setEventID", data.event_info_id);
           this.$store.dispatch("setWeddingInfo", informasi_wedding);
+          this.$store.dispatch("setGuestInfo", data.guest_information[0]);
+          const footer = data.footer_atera;
+          this.footer.url_ig = footer.url_instagram;
+          this.footer.url_fb = footer.url_facebook;
+          this.footer.url_globe = footer.url_globe;
         } else {
           // redirect to 404 page.
         }
       });
+  },
+  methods: {
+    openInvitation() {
+      this.isOpen = true;
+      Array.from(document.querySelectorAll("html, body, div#app")).forEach(
+        (item) => {
+          item.classList.remove("h-100");
+        }
+      );
+    },
   },
 };
 </script>
 
 <style>
 @import url("http://fonts.cdnfonts.com/css/ananda-black");
+@import url("https://fonts.googleapis.com/css?family=Crete+Round");
 </style>
 <style lang="less">
 .base-container {
-  max-width: 850px !important;
-  margin: 0px auto;
-  padding: 20px 30px;
   height: 100%;
   position: relative;
+  font-family: "Crete Round";
 
-  .segment {
+  .segment:not(:last-child) {
     margin-bottom: 100px;
+  }
+  footer {
+    text-align: center;
+    padding: 20px 0;
+
+    .atera-sosmed {
+      margin-bottom: 15px;
+
+      img {
+        margin: 0 10px;
+      }
+    }
+    .copyright {
+      font-weight: bold;
+    }
   }
 }
 </style>
