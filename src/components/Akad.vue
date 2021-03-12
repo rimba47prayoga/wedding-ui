@@ -64,7 +64,8 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 50px;
-    a.btn {
+    a.btn,
+    button {
       background: #af8760 !important;
       border-radius: 20px;
       padding: 5px 45px;

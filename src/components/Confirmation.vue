@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -44,7 +46,17 @@ export default {
         this.selected = [value[value.length - 1]];
       }
     },
-    confirm() {},
+    confirm() {
+      const guest_id = this.$store.state.guest_information.guest_id;
+      const is_attendant = this.selected[0] == "yes";
+      axios
+        .put(`/api/v1/data_tamu/confirmation/${guest_id}`, {
+          is_attendant: is_attendant,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    },
   },
 };
 </script>

@@ -7,13 +7,6 @@
 <script>
 export default {
   name: "App",
-  mounted() {
-    Array.from(document.querySelectorAll("html, body, div#app")).forEach(
-      (item) => {
-        item.classList.add("h-100");
-      }
-    );
-  },
 };
 </script>
 

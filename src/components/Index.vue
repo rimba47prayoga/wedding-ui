@@ -1,13 +1,28 @@
 <template>
   <div class="base-container">
     <template v-if="isOpen">
-      <div class="segment">
+      <div
+        class="segment"
+        :style="{
+          'background-image': 'url(' + getBackground('story') + ')',
+        }"
+      >
         <Story />
       </div>
-      <div class="segment">
+      <div
+        class="segment"
+        :style="{
+          'background-image': 'url(' + getBackground('mempelai') + ')',
+        }"
+      >
         <Mempelai />
       </div>
-      <div class="segment">
+      <div
+        class="segment"
+        :style="{
+          'background-image': 'url(' + getBackground('akad') + ')',
+        }"
+      >
         <Akad />
       </div>
       <div class="segment">
@@ -47,7 +62,14 @@
         </div>
       </footer>
     </template>
-    <Invitation v-else @openInvitation="openInvitation" />
+    <div
+      v-else
+      :style="{
+        'background-image': 'url(' + getCoverImage + ')',
+      }"
+    >
+      <Invitation @openInvitation="openInvitation" />
+    </div>
   </div>
 </template>
 
@@ -87,6 +109,18 @@ export default {
         url_fb: "",
         url_globe: "",
       },
+      segments: [],
+      segment_mapping: {
+        cover: Invitation,
+        story: Story,
+        mempelai: Mempelai,
+        akad: Akad,
+        resepsi: Resepsi,
+        galeri: Galery,
+        konfirmasi: Confirmation,
+        hadiah: Gift,
+        pesan: Message,
+      },
     };
   },
   created() {
@@ -104,6 +138,15 @@ export default {
           if (informasi_wedding.resepsi.length) {
             informasi_wedding.resepsi = informasi_wedding.resepsi[0];
           }
+          this.segments = data.segmentasi.map((item) => {
+            if (item.background_photo) {
+              item.background_photo =
+                "https://docs-api.bahtera.tech" +
+                item.background_photo.replace("/uploads", "");
+            }
+
+            return item;
+          });
           this.$store.dispatch("setEventID", data.event_info_id);
           this.$store.dispatch("setWeddingInfo", informasi_wedding);
           this.$store.dispatch("setGuestInfo", data.guest_information[0]);
@@ -119,11 +162,26 @@ export default {
   methods: {
     openInvitation() {
       this.isOpen = true;
-      Array.from(document.querySelectorAll("html, body, div#app")).forEach(
-        (item) => {
-          item.classList.remove("h-100");
-        }
-      );
+      // Array.from(document.querySelectorAll("html, body, div#app")).forEach(
+      //   (item) => {
+      //     item.classList.remove("h-100");
+      //   }
+      // );
+    },
+    getBackground(segment) {
+      if (this.$isMobile()) {
+        segment = `${segment}_mobile`;
+      }
+      const data =
+        this.segments.filter((item) => {
+          return item.segmentasi == segment;
+        })[0] || {};
+      return data.background_photo;
+    },
+  },
+  computed: {
+    getCoverImage() {
+      return this.getBackground("cover");
     },
   },
 };
@@ -141,6 +199,7 @@ export default {
 
   .segment:not(:last-child) {
     margin-bottom: 100px;
+    background-repeat: no-repeat;
   }
   footer {
     text-align: center;
@@ -156,6 +215,19 @@ export default {
     .copyright {
       font-weight: bold;
     }
+  }
+  .animate {
+    transition-delay: 0.1s;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in;
+  }
+
+  .slide-up {
+    transform: translateY(0);
+  }
+
+  .slide-up.animate-active {
+    transform: translateY(-100px);
   }
 }
 </style>

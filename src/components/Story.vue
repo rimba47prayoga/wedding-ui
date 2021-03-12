@@ -39,6 +39,7 @@ export default {};
 
   @media (max-width: 576px) {
     display: block;
+    padding: 20px 0px;
   }
   .img-desktop {
     @media (max-width: 576px) {
@@ -64,6 +65,7 @@ export default {};
     margin-left: 40px;
     @media (max-width: 576px) {
       margin: 0 0 30px 0;
+      padding: 0 30px;
     }
     .nav-title {
       font-size: 36px;

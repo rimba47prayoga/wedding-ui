@@ -1,13 +1,20 @@
 <template>
   <div class="invitation">
-    <p class="text-center">The wedding of</p>
-    <div class="mempelai-name-container">
-      <div class="mempelai-name">{{ wedding_information.nn_cpw }}</div>
-      <div class="mempelai-name">& {{ wedding_information.nn_cpp }}</div>
+    <div class="top-container">
+      <p class="wedding-of">The wedding of</p>
+      <div class="mempelai-name-container">
+        <div class="mempelai-name">{{ wedding_information.nn_cpw }}</div>
+        <div class="mempelai-name">& {{ wedding_information.nn_cpp }}</div>
+      </div>
+      <p class="wedding-date">- {{ weddingDate }} -</p>
     </div>
-    <p class="text-center">- {{ weddingDate }} -</p>
     <div class="guest-info">
-      <vue-qrcode class="qr-code" value="https://www.1stg.me" />
+      <vue-qrcode
+        class="qr-code"
+        value="https://www.1stg.me"
+        :color="{ dark: '#D2C4B0', light: '#ffffff' }"
+        :margin="2"
+      />
       <div class="guest-text">
         <div class="guest-name">{{ guest_information.guest_name }}</div>
         <div class="guest-address">{{ guest_information.guest_address }}</div>
@@ -51,12 +58,33 @@ export default {
 <style lang="less">
 .invitation {
   padding: 90px 0;
-  .mempelai-name-container {
-    margin-bottom: 20px;
-    .mempelai-name {
-      font-size: 50px;
-      font-family: "Ananda Black", sans-serif;
+  @media (max-width: 576px) {
+    padding: 180px 0 20px 0;
+  }
+
+  .top-container {
+    @media (max-width: 576px) {
+      padding: 0 30px;
+    }
+    .wedding-of,
+    .wedding-date {
       text-align: center;
+
+      @media (max-width: 576px) {
+        text-align: left;
+      }
+    }
+    .mempelai-name-container {
+      margin-bottom: 20px;
+      text-align: center;
+
+      @media (max-width: 576px) {
+        text-align: left;
+      }
+      .mempelai-name {
+        font-size: 50px;
+        font-family: "Ananda Black", sans-serif;
+      }
     }
   }
   .guest-info {
@@ -64,6 +92,12 @@ export default {
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+
+    @media (max-width: 576px) {
+      justify-content: flex-start;
+      padding: 0 30px;
+      margin-top: 120px;
+    }
     .qr-code {
       width: 75px;
     }
@@ -78,6 +112,9 @@ export default {
   .bottom-container {
     margin-top: 50px;
     text-align: center;
+    @media (max-width: 576px) {
+      margin-top: 120px;
+    }
     button {
       background: #af8760 !important;
       border-radius: 30px;
@@ -87,10 +124,7 @@ export default {
   }
   .logo-container {
     text-align: center;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 70px;
   }
 }
 </style>

@@ -15,8 +15,20 @@
         Cardially request the honor of your presence at wedding of belove child
       </div>
       <div class="mempelai-name">{{ wedding_information.cpw }}</div>
+      <div class="sosmed-mempelai">
+        <img src="@/assets/ig-mempelai.png" />
+        <a :href="wedding_information.sosmed_cpw" class="sosmed">
+          {{ getSosmedUsername(wedding_information.sosmed_cpw) }}
+        </a>
+      </div>
       <div class="divider-name">and</div>
       <div class="mempelai-name">{{ wedding_information.cpp }}</div>
+      <div class="sosmed-mempelai">
+        <img src="@/assets/ig-mempelai.png" />
+        <a :href="wedding_information.sosmed_cpp" class="sosmed">
+          {{ getSosmedUsername(wedding_information.sosmed_cpp) }}
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +37,11 @@
 import { mapState } from "vuex";
 
 export default {
+  methods: {
+    getSosmedUsername(link) {
+      return link.replace("https://www.instagram.com", "").replaceAll("/", "");
+    },
+  },
   computed: {
     ...mapState(["wedding_information"]),
   },
@@ -39,7 +56,7 @@ export default {
   .parents {
     display: flex;
     justify-content: space-between;
-    padding: 0px 15px 0 90px;
+    padding: 0px 15px;
 
     @media (max-width: 576px) {
       padding: 0;
@@ -54,6 +71,20 @@ export default {
     .mempelai-name {
       font-size: 36px;
       font-family: "Ananda Black", sans-serif;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .sosmed-mempelai {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a {
+        color: #828282;
+      }
+
+      img {
+        margin-right: 5px;
+      }
     }
     .divider-name {
       font-size: 15px;

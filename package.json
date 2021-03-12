@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "qrcode": "^1.4.4",
     "vue": "^2.6.11",
+    "vue-animate-scroll": "^0.1.5",
     "vue-device-detector": "github:weilbith/vue-device-detector",
     "vue-mobile-detection": "^1.0.0",
     "vue-qrcode": "^0.3.5",

@@ -14,6 +14,38 @@
             convenience, security, and convenience of sending envelopes.
           </p>
         </div>
+        <div class="bank-container">
+          <img src="@/assets/mandiri.png" />
+          <img src="@/assets/bca.png" />
+          <img src="@/assets/bni.png" />
+          <img src="@/assets/bri.png" />
+          <img src="@/assets/permata.png" />
+          <img src="@/assets/qris.png" />
+          <img src="@/assets/ovo.png" />
+          <img src="@/assets/dana.png" />
+          <img src="@/assets/linkaja.png" />
+          <img src="@/assets/shopee.png" />
+        </div>
+        <div class="amount-container">
+          <p>Select the amount you want :</p>
+          <div class="item-container">
+            <div class="item">100.000</div>
+            <div class="item">200.000</div>
+            <div class="item">300.000</div>
+            <div class="item">400.000</div>
+            <div class="item">500.000</div>
+          </div>
+          <b-form-group label="Other" label-for="other" class="other">
+            <b-form-input
+              v-model="other"
+              id="other"
+              placeholder="-"
+            ></b-form-input>
+          </b-form-group>
+        </div>
+        <div class="bottom-container">
+          <b-button @click="sendGift">Send Gift</b-button>
+        </div>
       </div>
     </template>
     <template v-else>
@@ -67,7 +99,7 @@ export default {
   padding: 20px 100px;
 
   @media (max-width: 576px) {
-    padding: 20px 30px;
+    padding: 20px 15px;
   }
   .left-section {
     background: #f8ead8;
@@ -101,10 +133,50 @@ export default {
     }
   }
   .mobile-display {
+    text-align: center;
     .nav-title {
       font-size: 36px;
       font-family: "Ananda Black", sans-serif;
       margin-bottom: 25px;
+    }
+    .bank-container {
+      img {
+        margin: 10px;
+      }
+    }
+    .amount-container {
+      .item-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .item {
+          margin: 10px;
+          padding: 5px 10px;
+        }
+      }
+    }
+    label {
+      text-align: left;
+    }
+    input {
+      background: #f8ead8 !important;
+      border: none !important;
+      width: 65%;
+    }
+    .item-container {
+      .item {
+        background: #f8ead8 !important;
+      }
+    }
+    .bottom-container {
+      margin-top: 30px;
+      text-align: left;
+      button {
+        background: #af8760 !important;
+        border-radius: 30px;
+        padding: 5px 50px;
+        font-size: 16px;
+      }
     }
   }
 }

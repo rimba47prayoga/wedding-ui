@@ -16,6 +16,7 @@
       <b-form-group label="Pesan" label-for="pesan">
         <b-form-textarea
           v-model="pesan"
+          required
           id="pesan"
           placeholder="-"
         ></b-form-textarea>
@@ -88,7 +89,7 @@ export default {
       let data = new FormData();
       data.append("event_info_id", this.event_id);
       data.append("attribute", "pesan");
-      data.append("nama", this.nama);
+      data.append("nama", this.nama || "Unknown");
       data.append("email", this.email);
       data.append("pesan", this.pesan);
       axios.post("/api/v1/invitation/pesan_amplop_hadiah", data).then(() => {

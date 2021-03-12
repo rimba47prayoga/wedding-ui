@@ -32,6 +32,7 @@ export default {
     font-family: "Ananda Black", sans-serif;
     margin-bottom: 25px;
     text-align: center;
+    line-height: normal;
   }
   .image-container {
     display: flex;
