@@ -1,14 +1,22 @@
 <template>
   <div class="invitation">
     <div class="top-container">
-      <p class="wedding-of">The wedding of</p>
-      <div class="mempelai-name-container">
+      <p class="wedding-of" data-aos="fade-right" data-aos-duration="1000">
+        The wedding of
+      </p>
+      <div
+        class="mempelai-name-container"
+        data-aos="fade-down"
+        data-aos-duration="1000"
+      >
         <div class="mempelai-name">{{ wedding_information.nn_cpw }}</div>
         <div class="mempelai-name">& {{ wedding_information.nn_cpp }}</div>
       </div>
-      <p class="wedding-date">- {{ weddingDate }} -</p>
+      <p class="wedding-date" data-aos="fade-right" data-aos-duration="1000">
+        - {{ weddingDate }} -
+      </p>
     </div>
-    <div class="guest-info">
+    <div class="guest-info" data-aos="fade-up" data-aos-duration="1000">
       <vue-qrcode
         class="qr-code"
         value="https://www.1stg.me"
@@ -20,7 +28,7 @@
         <div class="guest-address">{{ guest_information.guest_address }}</div>
       </div>
     </div>
-    <div class="bottom-container">
+    <div class="bottom-container" data-aos="fade-up" data-aos-duration="1000">
       <b-button @click="openInvitation">Buka Undangan</b-button>
     </div>
     <div class="logo-container">
@@ -43,13 +51,20 @@ export default {
     ...mapState(["wedding_information"]),
     ...mapState(["guest_information"]),
     weddingDate() {
-      const date = new Date(this.wedding_information.hari_bahagia);
-      return `${date.getDay()} ${getMonthName(date)} ${date.getFullYear()}`;
+      if (this.wedding_information.hari_bahagia) {
+        const date = new Date(this.wedding_information.hari_bahagia);
+        return `${date.getDay()} ${getMonthName(date)} ${date.getFullYear()}`;
+      }
+      return "";
     },
   },
   methods: {
     openInvitation() {
       this.$emit("openInvitation");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
   },
 };

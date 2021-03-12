@@ -1,6 +1,8 @@
 <template>
   <div class="galery">
-    <div class="nav-title">Galery</div>
+    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      Galery
+    </div>
     <div class="image-container">
       <img src="@/assets/dummy-galery.png" />
       <img src="@/assets/dummy-galery.png" />

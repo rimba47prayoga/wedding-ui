@@ -1,7 +1,9 @@
 <template>
   <div class="health-protocol">
     <div class="left-section">
-      <div class="nav-title">Protokol Kesehatan</div>
+      <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+        Protokol Kesehatan
+      </div>
       <div class="text">
         <p>
           Because the Covid 19 outbreak is quite unsettling and worrying, we

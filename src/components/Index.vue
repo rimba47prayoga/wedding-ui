@@ -1,32 +1,17 @@
 <template>
   <div class="base-container">
     <template v-if="isOpen">
-      <div
-        class="segment"
-        :style="{
-          'background-image': 'url(' + getBackground('story') + ')',
-        }"
-      >
-        <Story />
-      </div>
-      <div
-        class="segment"
-        :style="{
-          'background-image': 'url(' + getBackground('mempelai') + ')',
-        }"
-      >
-        <Mempelai />
-      </div>
-      <div
-        class="segment"
-        :style="{
-          'background-image': 'url(' + getBackground('akad') + ')',
-        }"
-      >
-        <Akad />
+      <div class="segment">
+        <Story :background="getBackground('story')" />
       </div>
       <div class="segment">
-        <Resepsi />
+        <Mempelai :background="getBackground('mempelai')" />
+      </div>
+      <div class="segment">
+        <Akad :background="getBackground('akad')" />
+      </div>
+      <div class="segment">
+        <Resepsi :background="getBackground('resepsi')" />
       </div>
       <div class="segment">
         <HealthProtocol />
@@ -215,19 +200,6 @@ export default {
     .copyright {
       font-weight: bold;
     }
-  }
-  .animate {
-    transition-delay: 0.1s;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-in;
-  }
-
-  .slide-up {
-    transform: translateY(0);
-  }
-
-  .slide-up.animate-active {
-    transform: translateY(-100px);
   }
 }
 </style>

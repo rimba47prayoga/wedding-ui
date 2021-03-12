@@ -1,6 +1,13 @@
 <template>
-  <div class="resepsi">
-    <div class="nav-title">Resepsi</div>
+  <div
+    class="resepsi"
+    :style="{
+      'background-image': 'url(' + background + ')',
+    }"
+  >
+    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      Resepsi
+    </div>
     <div class="content">
       <div class="date">{{ resepsi_date }}</div>
       <div class="session-time">Session II, 5.30 - 6.30 pm</div>
@@ -19,6 +26,9 @@ import { mapState } from "vuex";
 import { getDayName, getMonthName } from "@/utils";
 
 export default {
+  props: {
+    background: String,
+  },
   computed: {
     ...mapState(["wedding_information"]),
     resepsi_info() {

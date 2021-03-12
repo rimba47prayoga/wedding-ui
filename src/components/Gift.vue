@@ -2,7 +2,9 @@
   <div class="gift">
     <template v-if="$isMobile()">
       <div class="mobile-display">
-        <div class="nav-title">Gift</div>
+        <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+          Gift
+        </div>
         <div class="text">
           <p>
             We are very grateful for the prayers and wedding greetings that you
@@ -86,6 +88,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      other: "",
+    };
+  },
   methods: {
     sendGift() {},
   },

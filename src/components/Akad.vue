@@ -1,6 +1,13 @@
 <template>
-  <div class="akad">
-    <div class="nav-title">Akad</div>
+  <div
+    class="akad"
+    :style="{
+      'background-image': 'url(' + background + ')',
+    }"
+  >
+    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      Akad
+    </div>
     <div class="content">
       <div class="date">{{ akad_date }}</div>
       <div class="session-time">Session II, 5.30 - 6.30 pm</div>
@@ -19,6 +26,9 @@ import { mapState } from "vuex";
 import { getDayName, getMonthName } from "@/utils";
 
 export default {
+  props: {
+    background: String,
+  },
   computed: {
     ...mapState(["wedding_information"]),
     akad_info() {

@@ -1,6 +1,8 @@
 <template>
   <div class="confirmation">
-    <div class="nav-title">Confirmation</div>
+    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      Confirmation
+    </div>
     <div class="content">
       <p class="text">
         Suatu kehormatan untuk mengundang anda untuk hadir dan merayakan

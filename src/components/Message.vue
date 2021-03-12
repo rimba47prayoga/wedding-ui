@@ -1,6 +1,8 @@
 <template>
   <div class="pesan">
-    <div class="nav-title">Pesan</div>
+    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      Pesan
+    </div>
     <b-form @submit.prevent="submitMessage">
       <b-form-group label="Nama" label-for="nama" class="nama">
         <b-form-input v-model="nama" id="nama" placeholder="-"></b-form-input>
