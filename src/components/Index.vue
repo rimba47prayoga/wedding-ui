@@ -1,31 +1,31 @@
 <template>
   <div class="base-container">
     <template v-if="isOpen">
-      <div class="segment">
-        <Story :background="getBackground('story')" />
+      <div v-if="isActive('story')" class="segment">
+        <Story :segmentProps="getSegmentProps('story')" />
       </div>
-      <div class="segment">
+      <div v-if="isActive('mempelai')" class="segment">
         <Mempelai :background="getBackground('mempelai')" />
       </div>
-      <div class="segment">
+      <div v-if="isActive('akad')" class="segment">
         <Akad :background="getBackground('akad')" />
       </div>
-      <div class="segment">
+      <div v-if="isActive('resepsi')" class="segment">
         <Resepsi :background="getBackground('resepsi')" />
       </div>
-      <div class="segment">
-        <HealthProtocol />
+      <div v-if="isActive('livestreaming')" class="segment">
+        <HealthProtocol :background="getBackground('livestreaming')" />
       </div>
-      <div class="segment">
-        <Galery />
+      <div v-if="isActive('galeri')" class="segment">
+        <Galery :segmentProps="getSegmentProps('galeri')" />
       </div>
-      <div class="segment">
-        <Confirmation />
+      <div v-if="isActive('konfirmasi')" class="segment">
+        <Confirmation :background="getBackground('konfirmasi')" />
       </div>
-      <div class="segment">
-        <Message />
+      <div v-if="isActive('pesan')" class="segment">
+        <Message :background="getBackground('pesan')" />
       </div>
-      <div class="segment">
+      <div v-if="isActive('gift')" class="segment">
         <Gift />
       </div>
       <footer>
@@ -125,11 +125,14 @@ export default {
           }
           this.segments = data.segmentasi.map((item) => {
             if (item.background_photo) {
-              item.background_photo =
-                "https://docs-api.bahtera.tech" +
-                item.background_photo.replace("/uploads", "");
+              item.background_photo = this.fixUrlPhoto(item.background_photo);
             }
-
+            if (item.photo.length) {
+              item.photo = item.photo.map((item_photo) => {
+                item_photo.url_photo = this.fixUrlPhoto(item_photo.url_photo);
+                return item_photo;
+              });
+            }
             return item;
           });
           this.$store.dispatch("setEventID", data.event_info_id);
@@ -153,15 +156,46 @@ export default {
       //   }
       // );
     },
-    getBackground(segment) {
-      if (this.$isMobile()) {
-        segment = `${segment}_mobile`;
-      }
-      const data =
+    getPureSegment(segment) {
+      const base_segment = {
+        segmentasi: "",
+        on_off: true,
+        photo: [],
+        text: null,
+        background_photo: null,
+        number: null,
+      };
+      return (
         this.segments.filter((item) => {
           return item.segmentasi == segment;
-        })[0] || {};
-      return data.background_photo;
+        })[0] || base_segment
+      );
+    },
+    getSegmentProps(segment) {
+      let base_segment = this.getPureSegment(segment);
+      if (this.$isMobile()) {
+        segment = `${segment}_mobile`;
+        let mobile_segment = this.getPureSegment(segment);
+        if (mobile_segment.text) {
+          base_segment.text = mobile_segment.text;
+        }
+        if (mobile_segment.photo.length) {
+          base_segment.photo = mobile_segment.photo;
+        }
+        if (mobile_segment.background_photo) {
+          base_segment.background_photo = mobile_segment.background_photo;
+        }
+      }
+      return base_segment;
+    },
+    getBackground(segment) {
+      return this.getSegmentProps(segment).background_photo;
+    },
+    fixUrlPhoto(path) {
+      return "https://docs-api.bahtera.tech" + path.replace("/uploads", "");
+    },
+    isActive(segment) {
+      return this.getSegmentProps(segment).on_off;
     },
   },
   computed: {

@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="text" data-aos="fade-up" data-aos-duration="1000">
+      <div class="text" data-aos="fade-down" data-aos-duration="1000">
         Cardially request the honor of your presence at wedding of belove child
       </div>
       <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">

@@ -2,9 +2,7 @@
   <div class="gift">
     <template v-if="$isMobile()">
       <div class="mobile-display">
-        <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
-          Gift
-        </div>
+        <div class="nav-title">Gift</div>
         <div class="text">
           <p>
             We are very grateful for the prayers and wedding greetings that you
@@ -31,17 +29,59 @@
         <div class="amount-container">
           <p>Select the amount you want :</p>
           <div class="item-container">
-            <div class="item">100.000</div>
-            <div class="item">200.000</div>
-            <div class="item">300.000</div>
-            <div class="item">400.000</div>
-            <div class="item">500.000</div>
+            <div
+              :class="{
+                item: true,
+                selected: selected == '100.000',
+              }"
+              @click="selectAmount('100.000')"
+            >
+              100.000
+            </div>
+            <div
+              :class="{
+                item: true,
+                selected: selected == '200.000',
+              }"
+              @click="selectAmount('200.000')"
+            >
+              200.000
+            </div>
+            <div
+              :class="{
+                item: true,
+                selected: selected == '300.000',
+              }"
+              @click="selectAmount('300.000')"
+            >
+              300.000
+            </div>
+            <div
+              :class="{
+                item: true,
+                selected: selected == '400.000',
+              }"
+              @click="selectAmount('400.000')"
+            >
+              400.000
+            </div>
+            <div
+              :class="{
+                item: true,
+                selected: selected == '500.000',
+              }"
+              @click="selectAmount('500.000')"
+            >
+              500.000
+            </div>
           </div>
           <b-form-group label="Other" label-for="other" class="other">
             <b-form-input
               v-model="other"
               id="other"
               placeholder="-"
+              type="number"
+              @input="selected = ''"
             ></b-form-input>
           </b-form-group>
         </div>
@@ -91,10 +131,29 @@ export default {
   data() {
     return {
       other: "",
+      selected: "",
     };
   },
   methods: {
-    sendGift() {},
+    selectAmount(value) {
+      this.other = "";
+      if (this.selected && this.selected == value) {
+        this.selected = "";
+        return;
+      }
+      this.selected = value;
+    },
+    sendGift() {
+      const code = this.$route.params.code;
+      let amount = "";
+      if (this.selected) {
+        amount = this.selected;
+      } else if (this.other) {
+        amount = this.other;
+      }
+      const payment_link = `https://amplop.bahtera.tech?code=${code}&nominal=${amount}`;
+      window.open(payment_link, "_blank");
+    },
   },
 };
 </script>
@@ -172,7 +231,13 @@ export default {
     }
     .item-container {
       .item {
-        background: #f8ead8 !important;
+        background: #f8ead8;
+        cursor: pointer;
+
+        &.selected {
+          background: #af8760;
+          color: #ffffff;
+        }
       }
     }
     .bottom-container {

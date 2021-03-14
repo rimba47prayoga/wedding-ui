@@ -8,14 +8,14 @@
     <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
       Resepsi
     </div>
-    <div class="content">
+    <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <div class="date">{{ resepsi_date }}</div>
       <div class="session-time">Session II, 5.30 - 6.30 pm</div>
       <div class="address">
         {{ resepsi_info.location_info }}
       </div>
     </div>
-    <div class="bottom-container">
+    <div class="bottom-container" data-aos="zoom-in" data-aos-duration="1000">
       <b-button :href="resepsi_info.link_gmaps">Lihat Peta</b-button>
     </div>
   </div>

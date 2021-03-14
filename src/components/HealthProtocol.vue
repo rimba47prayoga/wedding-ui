@@ -1,10 +1,15 @@
 <template>
-  <div class="health-protocol">
+  <div
+    class="health-protocol"
+    :style="{
+      'background-image': 'url(' + background + ')',
+    }"
+  >
     <div class="left-section">
       <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
         Protokol Kesehatan
       </div>
-      <div class="text">
+      <div class="text" data-aos="zoom-in" data-aos-duration="1000">
         <p>
           Because the Covid 19 outbreak is quite unsettling and worrying, we
           apologize for not being able to invite all family, relatives, and
@@ -16,7 +21,7 @@
         </p>
       </div>
     </div>
-    <div class="right-section">
+    <div class="right-section" data-aos="fade-up" data-aos-duration="1000">
       <div class="item zoom">
         <img src="@/assets/Zoom.png" />
       </div>
@@ -32,7 +37,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    background: String,
+  },
+};
 </script>
 
 <style lang="less">
@@ -42,6 +51,7 @@ export default {};
   max-width: 1000px !important;
   margin: 0px auto;
   padding: 20px 30px;
+  background-repeat: no-repeat;
 
   @media (max-width: 576px) {
     display: block;

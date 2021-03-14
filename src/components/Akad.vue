@@ -8,14 +8,14 @@
     <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
       Akad
     </div>
-    <div class="content">
+    <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <div class="date">{{ akad_date }}</div>
       <div class="session-time">Session II, 5.30 - 6.30 pm</div>
       <div class="address">
         {{ akad_info.location_info }}
       </div>
     </div>
-    <div class="bottom-container">
+    <div class="bottom-container" data-aos="zoom-in" data-aos-duration="1000">
       <b-button :href="akad_info.link_gmaps">Lihat Peta</b-button>
     </div>
   </div>
@@ -49,6 +49,7 @@ export default {
   max-width: 850px !important;
   margin: 0px auto;
   padding: 20px 30px;
+  background-repeat: no-repeat;
   .nav-title {
     font-size: 36px;
     font-family: "Ananda Black", sans-serif;

@@ -1,8 +1,11 @@
 <template>
-  <div class="pesan">
-    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
-      Pesan
-    </div>
+  <div
+    class="pesan"
+    :style="{
+      'background-image': 'url(' + background + ')',
+    }"
+  >
+    <div class="nav-title">Pesan</div>
     <b-form @submit.prevent="submitMessage">
       <b-form-group label="Nama" label-for="nama" class="nama">
         <b-form-input v-model="nama" id="nama" placeholder="-"></b-form-input>
@@ -56,6 +59,9 @@ import axios from "axios";
 import querystring from "querystring";
 
 export default {
+  props: {
+    background: String,
+  },
   data() {
     return {
       nama: "",
@@ -115,6 +121,7 @@ export default {
   max-width: 850px !important;
   margin: 0px auto;
   padding: 20px 30px;
+  background-repeat: no-repeat;
   form {
     .form-group {
       &.nama,

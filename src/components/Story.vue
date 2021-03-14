@@ -2,28 +2,24 @@
   <div
     class="story"
     :style="{
-      'background-image': 'url(' + background + ')',
+      'background-image': 'url(' + segmentProps.background_photo + ')',
     }"
   >
-    <div class="img-desktop">
-      <img src="@/assets/dummy-wedding.jpg" />
+    <div
+      class="img-desktop"
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-offset="0"
+      data-aos-delay="300"
+    >
+      <img :src="getPhoto" />
     </div>
     <div class="content">
       <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
         Our Story
       </div>
       <div class="text" data-aos="fade-down" data-aos-duration="1000">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat,
-        urna non efficitur tempor, metus est pretium risus, id consequat elit
-        leo ut tortor. Fusce ex nisl, fermentum eget congue quis, consectetur
-        eget enim. Donec vitae tellus odio. Aliquam congue felis eu ipsum
-        luctus, vel vestibulum velit lacinia. Nulla eget turpis et arcu
-        condimentum dictum ut euismod enim. Fusce ipsum ipsum, maximus aliquam
-        mollis ut, tincidunt et nisl. Nunc ac arcu metus. In nibh nibh, porta
-        condimentum augue eu, consequat lacinia orci. Ut eu libero eget tellus
-        scelerisque ultrices. Aenean accumsan quam vitae nulla lacinia varius.
-        Etiam ut quam vitae diam iaculis dictum in at lectus. Nullam sagittis
-        faucibus dui, et venenatis lorem fermentum quis.
+        {{ segmentProps.text }}
       </div>
     </div>
     <div
@@ -31,8 +27,9 @@
       data-aos="zoom-in"
       data-aos-duration="1000"
       data-aos-offset="0"
+      data-aos-delay="500"
     >
-      <img src="@/assets/dummy-wedding.jpg" />
+      <img :src="getPhoto" />
     </div>
   </div>
 </template>
@@ -40,7 +37,20 @@
 <script>
 export default {
   props: {
-    background: String,
+    segmentProps: {
+      type: Object,
+      required: true,
+      default: () => ({
+        photo: [{ url_photo: "" }],
+        background_photo: "",
+        text: "",
+      }),
+    },
+  },
+  computed: {
+    getPhoto() {
+      return this.segmentProps.photo[0].url_photo;
+    },
   },
 };
 </script>

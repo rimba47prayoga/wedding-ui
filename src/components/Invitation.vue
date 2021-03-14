@@ -6,7 +6,7 @@
       </p>
       <div
         class="mempelai-name-container"
-        data-aos="fade-down"
+        data-aos="zoom-in"
         data-aos-duration="1000"
       >
         <div class="mempelai-name">{{ wedding_information.nn_cpw }}</div>

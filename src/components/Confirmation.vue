@@ -1,9 +1,14 @@
 <template>
-  <div class="confirmation">
+  <div
+    class="confirmation"
+    :style="{
+      'background-image': 'url(' + background + ')',
+    }"
+  >
     <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
       Confirmation
     </div>
-    <div class="content">
+    <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <p class="text">
         Suatu kehormatan untuk mengundang anda untuk hadir dan merayakan
         pernikahan kami.
@@ -22,16 +27,20 @@
         </b-form-group>
       </div>
     </div>
-    <div class="bottom-container">
+    <div class="bottom-container" data-aos="fade-up" data-aos-duration="1000">
       <b-button @click="confirm">Confirmation</b-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 
 export default {
+  props: {
+    background: String,
+  },
   data() {
     return {
       selected: [],
@@ -42,6 +51,15 @@ export default {
       ],
     };
   },
+  mounted() {
+    if (this.guest_information.is_confirmed) {
+      let checkboxValue = "no";
+      if (this.guest_information.is_attend) {
+        checkboxValue = "yes";
+      }
+      this.selected.push(checkboxValue);
+    }
+  },
   methods: {
     onCheck(value) {
       if (value.length > 1) {
@@ -51,14 +69,20 @@ export default {
     confirm() {
       const guest_id = this.$store.state.guest_information.guest_id;
       const is_attendant = this.selected[0] == "yes";
-      axios
-        .put(`/api/v1/data_tamu/confirmation/${guest_id}`, {
-          is_attendant: is_attendant,
-        })
-        .then((res) => {
-          console.log(res.data);
+      let data = new FormData();
+      data.append("is_attendant", is_attendant);
+      axios.put(`/api/v1/data_tamu/confirmation/${guest_id}`, data).then(() => {
+        this.$bvToast.toast("Terima kasih atas konfirmasinya.", {
+          title: "Notification",
+          toaster: "b-toaster-top-center",
+          solid: true,
+          appendToast: true,
         });
+      });
     },
+  },
+  computed: {
+    ...mapState(["guest_information"]),
   },
 };
 </script>
@@ -68,6 +92,7 @@ export default {
   max-width: 850px !important;
   margin: 0px auto;
   padding: 20px 30px;
+  background-repeat: no-repeat;
 
   @media (max-width: 576px) {
     padding: 20px 15px;
