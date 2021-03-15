@@ -15,7 +15,7 @@
       <img :src="getPhoto" />
     </div>
     <div class="content">
-      <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
         Our Story
       </div>
       <div class="text" data-aos="fade-down" data-aos-duration="1000">

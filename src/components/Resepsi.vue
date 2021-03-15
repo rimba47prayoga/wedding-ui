@@ -5,7 +5,7 @@
       'background-image': 'url(' + background + ')',
     }"
   >
-    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+    <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
       Resepsi
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">
@@ -23,7 +23,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { getDayName, getMonthName } from "@/utils";
+import moment from "moment";
 
 export default {
   props: {
@@ -35,10 +35,13 @@ export default {
       return this.wedding_information.resepsi;
     },
     resepsi_date() {
-      const date = new Date(this.resepsi_info.start_schedule);
-      const day = getDayName(date);
-      const month = getMonthName(date);
-      return `${day}, ${date.getDay()} ${month}, ${date.getFullYear()}`;
+      return moment(this.resepsi_info.start_schedule).format(
+        "dddd, DD MMMM YYYY"
+      );
+      // const date = new Date(this.resepsi_info.start_schedule);
+      // const day = getDayName(date);
+      // const month = getMonthName(date);
+      // return `${day}, ${date.getDay()} ${month}, ${date.getFullYear()}`;
     },
   },
 };

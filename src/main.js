@@ -20,7 +20,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 Vue.use(VueMobileDetection)
-AOS.init()
+AOS.init({
+  once: true,
+  delay: 300,
+  duration: 500
+})
 
 
 axios.defaults.baseURL = 'https://docs-api.bahtera.tech' // eslint-disable-line

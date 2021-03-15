@@ -5,7 +5,7 @@
       'background-image': 'url(' + background + ')',
     }"
   >
-    <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+    <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
       Akad
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">

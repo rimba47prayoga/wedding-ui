@@ -6,7 +6,7 @@
     }"
   >
     <div class="left-section">
-      <div class="nav-title" data-aos="fade-down" data-aos-duration="1000">
+      <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
         Protokol Kesehatan
       </div>
       <div class="text" data-aos="zoom-in" data-aos-duration="1000">
@@ -21,7 +21,7 @@
         </p>
       </div>
     </div>
-    <div class="right-section" data-aos="fade-up" data-aos-duration="1000">
+    <div class="right-section" data-aos="zoom-in" data-aos-duration="1000">
       <div class="item zoom">
         <img src="@/assets/Zoom.png" />
       </div>

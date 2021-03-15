@@ -28,7 +28,7 @@
         <div class="guest-address">{{ guest_information.guest_address }}</div>
       </div>
     </div>
-    <div class="bottom-container" data-aos="fade-up" data-aos-duration="1000">
+    <div class="bottom-container">
       <b-button @click="openInvitation">Buka Undangan</b-button>
     </div>
     <div class="logo-container">
