@@ -5,7 +5,7 @@
         <Story :segmentProps="getSegmentProps('story')" />
       </div>
       <div v-if="isActive('mempelai')" class="segment">
-        <Mempelai :background="getBackground('mempelai')" />
+        <Mempelai :segmentProps="getSegmentProps('mempelai')" />
       </div>
       <div v-if="isActive('akad')" class="segment">
         <Akad :background="getBackground('akad')" />
@@ -15,6 +15,9 @@
       </div>
       <div v-if="isActive('livestreaming')" class="segment">
         <HealthProtocol :background="getBackground('livestreaming')" />
+      </div>
+      <div v-if="isActive('countdown')" class="segment">
+        <Countdown :background="getBackground('countdown')" />
       </div>
       <div v-if="isActive('galeri')" class="segment">
         <Galery :segmentProps="getSegmentProps('galeri')" />
@@ -67,6 +70,7 @@ import Mempelai from "@/components/Mempelai.vue";
 import Akad from "@/components/Akad.vue";
 import Resepsi from "@/components/Resepsi.vue";
 import HealthProtocol from "@/components/HealthProtocol.vue";
+import Countdown from "@/components/Countdown.vue";
 import Galery from "@/components/Galery.vue";
 import Confirmation from "@/components/Confirmation.vue";
 import Message from "@/components/Message.vue";
@@ -83,6 +87,7 @@ export default {
     Confirmation,
     Message,
     HealthProtocol,
+    Countdown,
     Galery,
     Gift,
   },
@@ -138,6 +143,7 @@ export default {
           this.$store.dispatch("setEventID", data.event_info_id);
           this.$store.dispatch("setWeddingInfo", informasi_wedding);
           this.$store.dispatch("setGuestInfo", data.guest_information[0]);
+          // this.$store.dispatch("setVirtualInfo", data.virtual_info);
           const footer = data.footer_atera;
           this.footer.url_ig = footer.url_instagram;
           this.footer.url_fb = footer.url_facebook;

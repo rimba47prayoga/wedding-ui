@@ -47,6 +47,11 @@ export const store = new Vuex.Store({
       kloter: "",
       is_attend: false,
       is_confirmed: false
+    },
+    virtual_info: {
+      ig_link: "",
+      gmeet_link: "",
+      zoom_link: ""
     }
   },
   mutations: {
@@ -58,6 +63,9 @@ export const store = new Vuex.Store({
     },
     SET_GUEST_INFO(state, data) {
       state.guest_information = data;
+    },
+    SET_VIRTUAL_INFO(state, data) {
+      state.virtual_info = data;
     }
   },
   actions: {
@@ -69,6 +77,9 @@ export const store = new Vuex.Store({
     },
     setGuestInfo({ commit }, data) {
       commit('SET_GUEST_INFO', data);
+    },
+    setVirtualInfo({ commit }, data) {
+      commit('SET_VIRTUAL_INFO', data);
     }
   }
 })

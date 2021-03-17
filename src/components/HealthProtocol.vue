@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="show"
     class="health-protocol"
     :style="{
       'background-image': 'url(' + background + ')',
@@ -22,25 +23,37 @@
       </div>
     </div>
     <div class="right-section" data-aos="zoom-in" data-aos-duration="1000">
-      <div class="item zoom">
+      <a v-if="virtual_info.zoom_link" :href="virtual_info.zoom_link" class="item zoom">
         <img src="@/assets/Zoom.png" />
-      </div>
-      <div class="item ig">
+      </a>
+      <a a v-if="virtual_info.ig_link" :href="virtual_info.ig_link" class="item ig">
         <img src="@/assets/instagram-logo.png" />
         Instagram
-      </div>
-      <div class="item gmeet">
+      </a>
+      <a a v-if="virtual_info.gmeet_link" :href="virtual_info.gmeet_link" class="item gmeet">
         <img src="@/assets/Gmeet.png" />
-      </div>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     background: String,
   },
+  computed: {
+    ...mapState(["virtual_info"]),
+    show() {
+      return (
+        this.virtual_info.ig_link || 
+        this.virtual_info.gmeet_link || 
+        this.virtual_info.zoom_link
+      )
+    }
+  }
 };
 </script>
 
@@ -92,6 +105,8 @@ export default {
     .item {
       margin: 25px 0;
       cursor: pointer;
+      color: #212529 !important;
+      display: block;
 
       &.zoom {
         img {

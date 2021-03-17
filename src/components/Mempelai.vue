@@ -2,7 +2,7 @@
   <div
     class="mempelai"
     :style="{
-      'background-image': 'url(' + background + ')',
+      'background-image': 'url(' + segmentProps.background_photo + ')',
     }"
   >
     <div class="parents">
@@ -17,7 +17,7 @@
     </div>
     <div class="content">
       <div class="text" data-aos="fade-down" data-aos-duration="1000">
-        Cardially request the honor of your presence at wedding of belove child
+        {{ segmentProps.text }}
       </div>
       <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">
         {{ wedding_information.cpw }}
@@ -57,7 +57,14 @@ import { mapState } from "vuex";
 
 export default {
   props: {
-    background: String,
+    segmentProps: {
+      type: Object,
+      required: true,
+      default: () => ({
+        background_photo: "",
+        text: "",
+      }),
+    },
   },
   methods: {
     getSosmedUsername(link) {

@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="show"
     class="confirmation"
     :style="{
       'background-image': 'url(' + background + ')',
@@ -49,6 +50,7 @@ export default {
         { text: "Mungkin saya akan datang", value: "maybe" },
         { text: "Maaf, saya belum bisa datang ", value: "no" },
       ],
+      show: true
     };
   },
   mounted() {
@@ -78,6 +80,7 @@ export default {
           solid: true,
           appendToast: true,
         });
+        this.show = false;
       });
     },
   },
