@@ -8,18 +8,10 @@
   >
     <div class="left-section">
       <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
-        Protokol Kesehatan
+        {{ title }}
       </div>
       <div class="text" data-aos="zoom-in" data-aos-duration="1000">
-        <p>
-          Because the Covid 19 outbreak is quite unsettling and worrying, we
-          apologize for not being able to invite all family, relatives, and
-          friends to attend our children's contract event
-        </p>
-        <p>
-          We plan to virtually publish our wedding via Live Streaming which can
-          be viewed via the following applications:
-        </p>
+        {{ text }}
       </div>
     </div>
     <div class="right-section" data-aos="zoom-in" data-aos-duration="1000">
@@ -43,6 +35,8 @@ import { mapState } from "vuex";
 export default {
   props: {
     background: String,
+    title: String,
+    text: String
   },
   computed: {
     ...mapState(["virtual_info"]),

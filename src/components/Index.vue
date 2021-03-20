@@ -2,34 +2,41 @@
   <div class="base-container">
     <template v-if="isOpen">
       <div v-if="isActive('story')" class="segment">
-        <Story :segmentProps="getSegmentProps('story')" />
+        <Story :segmentProps="getSegmentProps('story')" :title="getTitle('story')" />
       </div>
-      <div v-if="isActive('mempelai')" class="segment">
-        <Mempelai :segmentProps="getSegmentProps('mempelai')" />
+      <div v-if="isActive('bride')" class="segment">
+        <Mempelai :segmentProps="getSegmentProps('bride')" />
       </div>
       <div v-if="isActive('akad')" class="segment">
-        <Akad :background="getBackground('akad')" />
+        <Akad :background="getBackground('akad')" :title="getTitle('akad')" />
       </div>
-      <div v-if="isActive('resepsi')" class="segment">
-        <Resepsi :background="getBackground('resepsi')" />
+      <div v-if="isActive('wedding-reception')" class="segment">
+        <Resepsi
+          :background="getBackground('wedding-reception')"
+          :title="getTitle('wedding-reception')"
+        />
       </div>
       <div v-if="isActive('livestreaming')" class="segment">
-        <HealthProtocol :background="getBackground('livestreaming')" />
+        <HealthProtocol
+          :background="getBackground('livestreaming')"
+          :title="getTitle('livestreaming')"
+          :text="getSegmentProps('livestreaming').text"
+        />
       </div>
       <div v-if="isActive('countdown')" class="segment">
-        <Countdown :background="getBackground('countdown')" />
+        <Countdown :background="getBackground('countdown')" :title="getTitle('countdown')" />
       </div>
-      <div v-if="isActive('galeri')" class="segment">
-        <Galery :segmentProps="getSegmentProps('galeri')" />
+      <div v-if="isActive('gallery')" class="segment">
+        <Galery :segmentProps="getSegmentProps('gallery')" :title="getTitle('gallery')" />
       </div>
-      <div v-if="isActive('konfirmasi')" class="segment">
-        <Confirmation :background="getBackground('konfirmasi')" />
+      <div v-if="isActive('confirmation')" class="segment">
+        <Confirmation :background="getBackground('confirmation')" :title="getTitle('confirmation')" />
       </div>
-      <div v-if="isActive('pesan')" class="segment">
-        <Message :background="getBackground('pesan')" />
+      <div v-if="isActive('messages')" class="segment">
+        <Message :background="getBackground('messages')" :title="getTitle('messages')" />
       </div>
       <div v-if="isActive('gift')" class="segment">
-        <Gift />
+        <Gift :title="getTitle('gift')" />
       </div>
       <footer>
         <div class="atera-sosmed">
@@ -177,7 +184,27 @@ export default {
         })[0] || base_segment
       );
     },
+    getActiveSegment(segment) {
+      const segments = {
+        cover : 'sampul',
+        story : 'cerita',
+        bride : 'mempelai',
+        akad: 'akad',
+        'wedding-reception' : 'resepsi',
+        'livestreaming' : 'siaran-langsung',
+        countdown : 'hitung-mundur',
+        gallery : 'galeri',
+        confirmation : 'konfirmasi',
+        gift : 'hadiah',
+        messages : 'pesan'
+      }
+      if (!this.getPureSegment(segment).segmentasi) {
+        segment = segments[segment]
+      }
+      return segment
+    },
     getSegmentProps(segment) {
+      segment = this.getActiveSegment(segment);
       let base_segment = this.getPureSegment(segment);
       if (this.$isMobile()) {
         segment = `${segment}_mobile`;
@@ -193,6 +220,18 @@ export default {
         }
       }
       return base_segment;
+    },
+    capitalize(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+    getTitle(segment) {
+      segment = this.getActiveSegment(segment);
+      if (segment === 'livestreaming') {
+        segment = 'live-streaming'
+      }
+      return segment.split('-').map(str => {
+        return this.capitalize(str)
+      }).join(' ')
     },
     getBackground(segment) {
       return this.getSegmentProps(segment).background_photo;

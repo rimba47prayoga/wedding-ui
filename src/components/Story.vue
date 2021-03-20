@@ -16,7 +16,7 @@
     </div>
     <div class="content">
       <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
-        Our Story
+        {{ title }}
       </div>
       <div class="text" data-aos="fade-down" data-aos-duration="1000">
         {{ segmentProps.text }}
@@ -46,6 +46,7 @@ export default {
         text: "",
       }),
     },
+    title: String
   },
   computed: {
     getPhoto() {

@@ -7,7 +7,7 @@
     }"
   >
     <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
-      Confirmation
+      {{ title }}
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <p class="text">
@@ -41,6 +41,7 @@ import axios from "axios";
 export default {
   props: {
     background: String,
+    title: String
   },
   data() {
     return {

@@ -5,7 +5,7 @@
       'background-image': 'url(' + background + ')',
     }"
   >
-    <div class="nav-title">Pesan</div>
+    <div class="nav-title">{{ title }}</div>
     <b-form @submit.prevent="submitMessage">
       <b-form-group label="Nama" label-for="nama" class="nama">
         <b-form-input v-model="nama" id="nama" placeholder="-"></b-form-input>
@@ -61,6 +61,7 @@ import querystring from "querystring";
 export default {
   props: {
     background: String,
+    title: String
   },
   data() {
     return {

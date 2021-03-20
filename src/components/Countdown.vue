@@ -5,7 +5,7 @@
       'background-image': 'url(' + background + ')',
     }"
   >
-   <div class="nav-title">Countdown</div>
+   <div class="nav-title">{{ title }}</div>
    <p class="text">Sampai jumpa di hari bahagia kami</p>
    <vue-countdown :time="getTime" v-slot="{ days, hours, minutes, seconds }">
     <div class="time-container">
@@ -36,6 +36,7 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 export default {
  props: {
     background: String,
+    title: String
   },
  components: {
   VueCountdown

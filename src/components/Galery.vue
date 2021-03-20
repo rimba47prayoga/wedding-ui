@@ -6,22 +6,56 @@
     }"
   >
     <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
-      Galery
+      {{ title }}
     </div>
     <div class="image-container">
       <img
         v-for="(photo, index) in getPhotos"
         :key="index"
         :src="photo"
+        @click="showSlide(index)"
         data-aos="zoom-in"
         data-aos-duration="1000"
       />
     </div>
-  </div>
+    <b-modal
+      v-model="show_slide"
+      hide-header
+      hide-footer
+      centered
+      id="carousel-container"
+    >
+      <b-carousel
+        id="carousel-gallery"
+        v-model="slide"
+        :interval="5000"
+        controls
+        background="#ababab"
+        img-width="1024"
+        img-height="480"
+        style="text-shadow: 1px 1px 2px #333;"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <b-carousel-slide
+        v-for="(photo, index) in getPhotos"
+        :key="index"
+        :img-src="photo"
+        ></b-carousel-slide>
+      </b-carousel>
+    </b-modal>
+  </div> 
 </template>
 
 <script>
 export default {
+  data() {
+      return {
+        show_slide: false,
+        slide: 0,
+        sliding: null
+      }
+    },
   props: {
     segmentProps: {
       type: Object,
@@ -32,6 +66,25 @@ export default {
         text: "",
       }),
     },
+    title: String
+  },
+  methods: {
+    onSlideStart() {
+      this.sliding = true
+    },
+    onSlideEnd() {
+      this.sliding = false
+    },
+    showSlide(index) {
+      this.show_slide = true
+      this.slide = index
+      document.body.classList.add('modal-open')
+    },
+    closeSlide() {
+      this.show_slide = false
+      this.slide = 0
+      document.body.classList.remove('modal-open')
+    }
   },
   computed: {
     getPhotos() {
@@ -73,5 +126,26 @@ export default {
       }
     }
   }
+  
 }
+#carousel-container {
+    .modal-content {
+      .modal-body {
+        padding: 0;
+
+        .carousel-control-next {
+          right: -80px;
+          @media (max-width: 576px) {
+            right: 0;
+          }
+        }
+        .carousel-control-prev {
+          left: -80px;
+          @media (max-width: 576px) {
+            left: 0;
+          }
+        }
+      }
+    }
+  }
 </style>

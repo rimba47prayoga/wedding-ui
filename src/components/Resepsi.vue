@@ -6,7 +6,7 @@
     }"
   >
     <div class="nav-title" data-aos="zoom-in" data-aos-duration="1000">
-      Resepsi
+      {{ title }}
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <div class="date">{{ resepsi_date }}</div>
@@ -28,6 +28,7 @@ import moment from "moment";
 export default {
   props: {
     background: String,
+    title: String
   },
   computed: {
     ...mapState(["wedding_information"]),
