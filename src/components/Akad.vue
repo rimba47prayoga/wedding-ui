@@ -10,7 +10,12 @@
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <div class="date">{{ akad_date }}</div>
-      <div class="session-time">Session II, 5.30 - 6.30 pm</div>
+      <div
+        v-if="getSession"
+        class="session-time"
+      >
+        Session {{ getSession }}, {{ getTime }}
+      </div>
       <div class="address">
         {{ akad_info.location_info }}
       </div>
@@ -23,7 +28,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { getDayName, getMonthName } from "@/utils";
+import moment from "moment";
 
 export default {
   props: {
@@ -36,11 +41,30 @@ export default {
       return this.wedding_information.akad;
     },
     akad_date() {
-      const date = new Date(this.akad_info.start_schedule);
-      const day = getDayName(date);
-      const month = getMonthName(date);
-      return `${day}, ${date.getDay()} ${month}, ${date.getFullYear()}`;
+      return moment(this.akad_info.start_schedule).format(
+        "dddd, DD MMMM YYYY"
+      );
+      // const date = new Date(this.akad_info.start_schedule);
+      // const day = getDayName(date);
+      // const month = getMonthName(date);
+      // return `${day}, ${date.getDay()} ${month}, ${date.getFullYear()}`;
     },
+    getSession() {
+      const akad = this.wedding_information.akad
+      if (akad && akad.kloter) {
+        return akad.kloter
+      }
+      return ""
+    },
+    getTime() {
+      const akad = this.wedding_information.akad
+      if (akad && akad.kloter) {
+        const start = moment(akad.start_schedule).format("h.mm a")
+        const end = moment(akad.end_schedule).format("h.mm a")
+        return `${start} - ${end}`
+      }
+      return ""
+    }
   },
 };
 </script>

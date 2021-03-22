@@ -1,52 +1,56 @@
 <template>
   <div
-    class="mempelai"
+    class="mempelai-background"
     :style="{
       'background-image': 'url(' + segmentProps.background_photo + ')',
     }"
   >
-    <div class="parents">
-      <div class="left-section" data-aos="fade-right" data-aos-duration="1000">
-        <div>{{ wedding_information.ayah_cpw }}</div>
-        <div>{{ wedding_information.ibu_cpw }}</div>
+    <div class="mempelai">
+      <div class="parents">
+        <div class="left-section" data-aos="fade-right" data-aos-duration="1000">
+          <div>{{ wedding_information.ayah_cpw }}</div>
+          <div>{{ wedding_information.ibu_cpw }}</div>
+        </div>
+        <div class="right-section" data-aos="fade-left" data-aos-duration="1000">
+          <div>{{ wedding_information.ayah_cpp }}</div>
+          <div>{{ wedding_information.ibu_cpp }}</div>
+        </div>
       </div>
-      <div class="right-section" data-aos="fade-left" data-aos-duration="1000">
-        <div>{{ wedding_information.ayah_cpp }}</div>
-        <div>{{ wedding_information.ibu_cpp }}</div>
-      </div>
-    </div>
-    <div class="content">
-      <div class="text" data-aos="fade-down" data-aos-duration="1000">
-        {{ segmentProps.text }}
-      </div>
-      <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">
-        {{ wedding_information.cpw }}
-      </div>
-      <div
-        class="sosmed-mempelai"
-        data-aos="zoom-in-down"
-        data-aos-duration="1000"
-      >
-        <img src="@/assets/ig-mempelai.png" />
-        <a :href="wedding_information.sosmed_cpw" class="sosmed">
-          {{ getSosmedUsername(wedding_information.sosmed_cpw) }}
-        </a>
-      </div>
-      <div class="divider-name" data-aos="zoom-in" data-aos-duration="1000">
-        and
-      </div>
-      <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">
-        {{ wedding_information.cpp }}
-      </div>
-      <div
-        class="sosmed-mempelai"
-        data-aos="zoom-in-down"
-        data-aos-duration="1000"
-      >
-        <img src="@/assets/ig-mempelai.png" />
-        <a :href="wedding_information.sosmed_cpp" class="sosmed">
-          {{ getSosmedUsername(wedding_information.sosmed_cpp) }}
-        </a>
+      <div class="content">
+        <div class="text" data-aos="fade-down" data-aos-duration="1000">
+          {{ segmentProps.text }}
+        </div>
+        <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">
+          {{ wedding_information.cpw }}
+        </div>
+        <div
+          v-if="wedding_information.sosmed_cpw"
+          class="sosmed-mempelai"
+          data-aos="zoom-in-down"
+          data-aos-duration="1000"
+        >
+          <img src="@/assets/ig-mempelai.png" />
+          <a :href="wedding_information.sosmed_cpw" class="sosmed">
+            {{ getSosmedUsername(wedding_information.sosmed_cpw) }}
+          </a>
+        </div>
+        <div class="divider-name" data-aos="zoom-in" data-aos-duration="1000">
+          and
+        </div>
+        <div class="mempelai-name" data-aos="fade-down" data-aos-duration="1000">
+          {{ wedding_information.cpp }}
+        </div>
+        <div
+          class="sosmed-mempelai"
+          data-aos="zoom-in-down"
+          data-aos-duration="1000"
+          v-if="wedding_information.sosmed_cpp"
+        >
+          <img src="@/assets/ig-mempelai.png" />
+          <a :href="wedding_information.sosmed_cpp" class="sosmed">
+            {{ getSosmedUsername(wedding_information.sosmed_cpp) }}
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -78,11 +82,14 @@ export default {
 </script>
 
 <style lang="less">
+.mempelai-background {
+  background-repeat: no-repeat;
+}
 .mempelai {
   max-width: 850px !important;
   margin: 0px auto;
   padding: 20px 30px;
-  background-repeat: no-repeat;
+  
   .parents {
     display: flex;
     justify-content: space-between;

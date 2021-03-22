@@ -154,6 +154,9 @@ export default {
       } else if (this.other) {
         amount = this.other;
       }
+      if (amount) {
+        amount = amount.toString().replace(".", "");
+      }
       const payment_link = `https://amplop.bahtera.tech?code=${code}&nominal=${amount}`;
       window.open(payment_link, "_blank");
     },

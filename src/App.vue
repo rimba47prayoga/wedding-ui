@@ -7,6 +7,14 @@
 <script>
 export default {
   name: "App",
+  created() {
+    document.title = this.getTitle
+  },
+  computed: {
+    getTitle() {
+      return this.$route.params.code
+    }
+  }
 };
 </script>
 

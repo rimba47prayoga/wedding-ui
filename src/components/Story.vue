@@ -59,7 +59,7 @@ export default {
 <style lang="less">
 .story {
   margin: 0px auto;
-  padding: 20px 30px;
+  padding: 20px 30px 0 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,15 +67,15 @@ export default {
 
   @media screen and (max-width: 576px), screen and (max-width: 768px) {
     display: block;
-    padding: 20px 0px;
+    padding: 20px 0px 0 0;
   }
   .img-desktop {
     @media screen and (max-width: 576px), screen and (max-width: 768px) {
       display: none;
     }
     img {
-      width: 800px;
-      height: 800px;
+      width: 100%;
+      height: 100%;
     }
   }
   .img-mobile {

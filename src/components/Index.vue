@@ -123,9 +123,17 @@ export default {
   created() {
     const code = this.$route.params.code;
     const guest = this.$route.params.guest;
+    let url = `/api/v3/invitation/attribute?code=${code}`;
+    if (guest) {
+      url = `${url}&qr_unique_name=${guest}`
+    }
     axios
-      .get(`/api/v3/invitation/attribute?code=${code}&qr_unique_name=${guest}`)
+      .get(url)
       .then((res) => {
+        if (res.status === 204) {
+          // redirect to 404
+          return;
+        }
         if (res.data.result.length) {
           const data = res.data.result[0];
           const informasi_wedding = data.informasi_wedding[0];
@@ -149,7 +157,9 @@ export default {
           });
           this.$store.dispatch("setEventID", data.event_info_id);
           this.$store.dispatch("setWeddingInfo", informasi_wedding);
-          this.$store.dispatch("setGuestInfo", data.guest_information[0]);
+          if (guest) {
+            this.$store.dispatch("setGuestInfo", data.guest_information[0]);
+          }
           // this.$store.dispatch("setVirtualInfo", data.virtual_info);
           const footer = data.footer_atera;
           this.footer.url_ig = footer.url_instagram;

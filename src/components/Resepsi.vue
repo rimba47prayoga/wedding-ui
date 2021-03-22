@@ -10,7 +10,12 @@
     </div>
     <div class="content" data-aos="zoom-in" data-aos-duration="1000">
       <div class="date">{{ resepsi_date }}</div>
-      <div class="session-time">Session II, 5.30 - 6.30 pm</div>
+      <div
+        v-if="getSession"
+        class="session-time"
+      >
+        Session {{ getSession }}, {{ getTime }}
+      </div>
       <div class="address">
         {{ resepsi_info.location_info }}
       </div>
@@ -44,6 +49,22 @@ export default {
       // const month = getMonthName(date);
       // return `${day}, ${date.getDay()} ${month}, ${date.getFullYear()}`;
     },
+    getSession() {
+      const resepsi = this.wedding_information.resepsi
+      if (resepsi && resepsi.kloter) {
+        return resepsi.kloter
+      }
+      return ""
+    },
+    getTime() {
+      const resepsi = this.wedding_information.resepsi
+      if (resepsi && resepsi.kloter) {
+        const start = moment(resepsi.start_schedule).format("h.mm a")
+        const end = moment(resepsi.end_schedule).format("h.mm a")
+        return `${start} - ${end}`
+      }
+      return ""
+    }
   },
 };
 </script>

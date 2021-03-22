@@ -16,7 +16,12 @@
         - {{ weddingDate }} -
       </p>
     </div>
-    <div class="guest-info" data-aos="fade-up" data-aos-duration="1000">
+    <div
+      v-if="$route.params.guest"
+      class="guest-info"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
       <vue-qrcode
         class="qr-code"
         value="https://www.1stg.me"
@@ -39,9 +44,8 @@
 
 <script>
 import { mapState } from "vuex";
+import moment from "moment";
 import VueQrcode from "vue-qrcode";
-
-import { getMonthName } from "@/utils";
 
 export default {
   components: {
@@ -52,8 +56,8 @@ export default {
     ...mapState(["guest_information"]),
     weddingDate() {
       if (this.wedding_information.hari_bahagia) {
-        const date = new Date(this.wedding_information.hari_bahagia);
-        return `${date.getDay()} ${getMonthName(date)} ${date.getFullYear()}`;
+        const date = moment(this.wedding_information.hari_bahagia);
+        return date.format('DD MMMM YYYY')
       }
       return "";
     },

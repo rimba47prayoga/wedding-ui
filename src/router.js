@@ -9,7 +9,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/:code/:guest',
+      path: '/:code/:guest?',
       name: 'index',
       component: Index
     }

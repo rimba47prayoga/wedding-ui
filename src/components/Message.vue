@@ -6,7 +6,7 @@
     }"
   >
     <div class="nav-title">{{ title }}</div>
-    <b-form @submit.prevent="submitMessage">
+    <b-form @submit.prevent="submitMessage" ref="messageForm">
       <b-form-group label="Nama" label-for="nama" class="nama">
         <b-form-input v-model="nama" id="nama" placeholder="-"></b-form-input>
       </b-form-group>
@@ -102,6 +102,10 @@ export default {
       data.append("email", this.email);
       data.append("pesan", this.pesan);
       axios.post("/api/v1/invitation/pesan_amplop_hadiah", data).then(() => {
+        this.nama = ""
+        this.email  = ""
+        this.pesan = ""
+        this.$refs.messageForm.reset()
         this.getMessage(1);
       });
     },
